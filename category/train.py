@@ -4,11 +4,10 @@ from torch.utils.data.sampler import SubsetRandomSampler
 from torchvision import transforms, datasets
 import torchvision.models as models
 from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
 import numpy as np
-import itertools
 import ctypes
 from PIL import ImageFile
+from category.helper import plot_confusion_matrix
 
 # This will deal with file size errors
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -189,58 +188,5 @@ for epoch in range(epochs):
 all_labels, all_preds = all_labels.cpu(), all_preds.cpu()
 cm = confusion_matrix(all_labels.view(-1), all_preds.view(-1))
 
-
-def save_plot():
-    """
-    plot charts to compare training and validation losses and accuracies
-    and save them as png
-    """
-    plt.plot(train_losses, label="train loss")
-    plt.plot(valid_losses, label="valid loss")
-    plt.title("loss comparison")
-    plt.legend(loc="upper left")
-    plt.savefig("charts/losses.png")
-    plt.close()
-
-    plt.plot(train_accuracies, label="train accuracy")
-    plt.plot(valid_accuracies, label="valid accuracy")
-    plt.legend(loc="upper left")
-    plt.title("accuracy")
-    plt.savefig("charts/accuracy.png")
-    plt.close()
-
-
-def plot_confusion_matrix(cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues):
-    """
-    plot chart to show confusion matrix
-    it will show number of right and wrong predictions for each class
-    and save it as png
-    """
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print("Confusion matrix, without normalization")
-
-    plt.imshow(cm, interpolation="nearest", cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
-
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt), horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
-    plt.tight_layout()
-    plt.ylabel("True label")
-    plt.xlabel("Predicted label")
-    plt.savefig("charts/confusion_matrix.png", bbox_inches="tight")
-    plt.close()
-
-
-save_plot()
+# Plot confusion matrix, function will save plot as png file
 plot_confusion_matrix(cm, train_data.classes)
