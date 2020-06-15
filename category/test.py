@@ -24,7 +24,7 @@ def procces_image(image_path):
     """
     Apply transformations to image and returned transformed image
     """
-    image = Image.open(image_path)
+    image = Image.open(image_path).convert('RGB')
     image = transform(image).unsqueeze(0)
     return image
 
@@ -100,10 +100,10 @@ def main():
     mapper = {0: "drawing-SFW", 1: "hentai-NSFW", 2: "neutral-SFW", 3: "porn-NSFW", 4: "sexy-SFW"}
     view_classify(image_path, probs, classes, pred, mapper)
 
-    #test_loader(model,mapper)
+    # test_loader(model,mapper)
 
     plt.show()
 
+
 if __name__ == '__main__':
     main()
-
