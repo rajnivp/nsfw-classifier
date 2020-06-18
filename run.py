@@ -136,14 +136,19 @@ class Ui_MainWindow(object):
     def setExistingDirectory(self):
         self.dialog = QDialog()
         options = QFileDialog.DontResolveSymlinks | QFileDialog.ShowDirsOnly
-        self.file = QFileDialog.getOpenFileName(self.dialog, "Open Folder", options=options)
-        self.directory = "/".join(self.file[0].split('/')[0:-1])
-        self.file = self.file[0].split('/')[-1]
-        self.imagelist = os.listdir(self.directory)
-        self.image_number = self.imagelist.index(self.file)
-        self.label.setText("")
+        try:
+            self.file = QFileDialog.getOpenFileName(self.dialog, "Open Folder", options=options)
+            if self.file!=('',''):
+                self.directory = "/".join(self.file[0].split('/')[0:-1])
+                self.file = self.file[0].split('/')[-1]
+                self.imagelist = os.listdir(self.directory)
+                self.image_number = self.imagelist.index(self.file)
+                self.label.setText("")
 
-        self.showimage()
+                self.showimage()
+
+        except FileNotFoundError:
+            pass
 
 
 if __name__ == "__main__":
