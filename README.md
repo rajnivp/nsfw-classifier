@@ -4,7 +4,7 @@ This classifier is trained on resnet50 architecture for 30 epochs and it took 3 
 with ~90% accuracy on my machine
 ## Prerequisites
 
-- Python
+- Python 3.x
 ## How to train a model
 - Install and activate virtual enviroment
 - Run pip install -r requirements.txt
