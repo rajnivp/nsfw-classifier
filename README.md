@@ -5,12 +5,12 @@ with ~90% accuracy on my machine
 ## Prerequisites
 
 - Python 3.x
-## How to train a model
+## How to train model
 - Install and activate virtual enviroment
 - Run pip install -r requirements.txt
 - Run downloader.py to collect data for different folders
 - Run train.py
-## How to test a model
+## How to test model
 - Run plotting.ipynb to plot test probabilities
 - To test on single image run following command<br>
   test.py path-to-image<br>
