@@ -15,4 +15,7 @@ with ~90% accuracy on my machine
 - To test on single image run following command<br>
   test.py path-to-image<br>
   alternativaly to test images on gui see below example<br><br>
-![example](https://github.com/rajnivp/nsfw-classifier/blob/master/assets/classifier.gif)
+ <p align="center"> 
+<img src="https://github.com/rajnivp/nsfw-classifier/blob/master/assets/classifier.gif">
+</p>
+
